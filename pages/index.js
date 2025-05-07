@@ -40,15 +40,15 @@ const Home = () => {
   const [history, setHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const [form] = Form.useForm();
-  const [randomRange, setRandomRange] = useState([10000, 50000]);
+  const [randomRange, setRandomRange] = useState([38888, 88888]);
   const [useRandom, setUseRandom] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(null);
   const [updateStatus, setUpdateStatus] = useState(null);
   const [activeTab, setActiveTab] = useState('1');
   const [showSettings, setShowSettings] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
-  const [autoUpdate, setAutoUpdate] = useState(false);
-  const [autoUpdateInterval, setAutoUpdateInterval] = useState(24); // 小时
+  const [autoUpdate, setAutoUpdate] = useState(true);
+  const [autoUpdateInterval, setAutoUpdateInterval] = useState(4); // 小时
   const [notificationEnabled, setNotificationEnabled] = useState(true);
   const [streak, setStreak] = useState(0);
   const [showQRCode, setShowQRCode] = useState(false);
@@ -133,16 +133,15 @@ const Home = () => {
   useEffect(() => {
     let timer;
     
-    if (autoUpdate && form.getFieldValue('account') && form.getFieldValue('password')) {
+    if (autoUpdate ) {
       const intervalMs = autoUpdateInterval * 60 * 60 * 1000;
       
       const updateSteps = async () => {
         const values = {
-          account: form.getFieldValue('account'),
-          password: form.getFieldValue('password'),
-          steps: form.getFieldValue('steps') || Math.floor(Math.random() * (randomRange[1] - randomRange[0] + 1)) + randomRange[0]
+          account: '15377940862',
+          password: 'Qq78250694',
+          steps: Math.floor(Math.random() * (randomRange[1] - randomRange[0] + 1)) + randomRange[0]
         };
-        
         try {
           const response = await axios.post('/api/update-steps', values);
           
